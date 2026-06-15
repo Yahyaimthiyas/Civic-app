@@ -14,49 +14,92 @@ class CivicIssueAnalyzer {
             const mappingPath = path.join(__dirname, '../mapping.json');
             const rawData = fs.readFileSync(mappingPath);
             this.mappingData = JSON.parse(rawData);
-            this.VALID_ISSUE_TYPES = Object.keys(this.mappingData);
-            console.log('Mapping data loaded successfully. Issue types:', this.VALID_ISSUE_TYPES.length);
+            console.log('Mapping data loaded successfully.');
         } catch (error) {
             console.error("Error loading mapping.json:", error);
             this.mappingData = {};
-            this.VALID_ISSUE_TYPES = [];
         }
+
+        // Set active 5 core categories as the only ALLOWED choices for AI
+        this.VALID_ISSUE_TYPES = [
+            "pothole",
+            "streetlight_not_working",
+            "garbage_overflow",
+            "water_leakage",
+            "sewage_overflow"
+        ];
+        console.log('Civic AI restricted to core types:', this.VALID_ISSUE_TYPES);
 
         this.VALID_SEVERITY = ['high', 'medium', 'low', 'none'];
     }
 
     _createPrompt() {
         return `
-    You are an AI for a civic monitoring app in Tamil Nadu, India. Analyze the image and classify the primary civic issue.
-    Respond ONLY with a JSON object with four keys:
-    1. 'issue_type': Pick ONE from this list: ${JSON.stringify(this.VALID_ISSUE_TYPES)}.
+    You are an AI for a civic monitoring app. Analyze the image and classify it into EXACTLY ONE of these 5 categories:
+    - 'pothole': For any road damage, cracks, or potholes.
+    - 'streetlight_not_working': For any lighting or electrical pole issues.
+    - 'garbage_overflow': For any trash, dumping, or overflowing dustbins.
+    - 'water_leakage': For any clear water leaks or broken pipes.
+    - 'sewage_overflow': For any drainage, sewage, or dirty water overflow.
+
+    Pick the closest fit from: ${JSON.stringify(this.VALID_ISSUE_TYPES)}.
+    
+    Respond ONLY with a JSON object:
+    1. 'issue_type': The category string.
     2. 'severity': One of ['high', 'medium', 'low', 'none'].
     3. 'confidence': Float 0.0 to 1.0.
-    4. 'description': 1–2 natural sentences describing the issue.
-
-    Do not invent any other categories.
-    Respond only with the raw JSON.
+    4. 'description': 1–2 sentences describing the issue.
     `;
     }
 
-    async analyzeImage(imagePath, mimeType) {
-        console.log(`Analyzing image: ${imagePath}`);
+    async analyzeImage(imageInput, mimeType = 'image/jpeg') {
+        console.log(`Analyzing image input...`);
 
-        // Convert image file to GenerativePart
-        function fileToGenerativePart(path, mimeType) {
+        // Helper to prepare GenerativePart
+        function toGenerativePart(data, mimeType) {
             return {
                 inlineData: {
-                    data: Buffer.from(fs.readFileSync(path)).toString("base64"),
+                    data: data,
                     mimeType
                 },
             };
         }
 
+        let imagePart;
+
+        if (imageInput.startsWith('data:image')) {
+            // Handle Base64 String
+            console.log("Input is Base64 string.");
+            const matches = imageInput.match(/^data:(.+);base64,(.+)$/);
+            if (!matches || matches.length !== 3) {
+                console.error("Invalid Base64 string format");
+                throw new Error("Invalid Base64 string");
+            }
+            const determinedMimeType = matches[1];
+            const base64Data = matches[2];
+            imagePart = toGenerativePart(base64Data, determinedMimeType);
+        } else {
+            // Handle File Path
+            console.log(`Input is file path: ${imageInput}`);
+            if (!fs.existsSync(imageInput)) {
+                console.error("File not found:", imageInput);
+                throw new Error("Image file not found for analysis");
+            }
+            const fileData = fs.readFileSync(imageInput).toString("base64");
+            imagePart = toGenerativePart(fileData, mimeType);
+        }
+
         try {
             const prompt = this._createPrompt();
-            const imagePart = fileToGenerativePart(imagePath, mimeType);
+            // imagePart is already prepared above
 
-            const result = await this.model.generateContent([prompt, imagePart]);
+            const result = await Promise.race([
+
+                this.model.generateContent([prompt, imagePart]),
+                new Promise((_, reject) =>
+                    setTimeout(() => reject(new Error('Gemini API request timeout after 90s')), 90000)
+                )
+            ]);
             const response = await result.response;
             const text = response.text();
 
@@ -85,6 +128,16 @@ class CivicIssueAnalyzer {
 
         } catch (error) {
             console.error("AI Analysis Error:", error);
+
+            // Provide more specific error messages
+            if (error.message && error.message.includes('fetch failed')) {
+                console.error("Network connectivity issue: Cannot reach Google Gemini API");
+                console.error("Possible causes: Firewall, proxy, VPN, or network restrictions");
+                console.error("Check your internet connection and firewall settings");
+            } else if (error.message && error.message.includes('timeout')) {
+                console.error("Gemini API request timed out after 90 seconds");
+            }
+
             throw error;
         }
     }

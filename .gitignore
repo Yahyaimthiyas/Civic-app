@@ -1,1 +1,20 @@
+# Firebase Admin SDK key
 Backend/serviceAccountKey.json
+
+# Environment secrets
+Backend/.env
+
+# Firebase config
+flutterapp/android/app/google-services.json
+
+# Uploaded files
+Backend/uploads/
+
+# Node modules
+node_modules/
+
+# Flutter build
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.dart_tool/

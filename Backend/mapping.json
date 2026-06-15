@@ -1,134 +1,110 @@
 {
   "pothole": {
-    "department": "Highways Department / Corporation",
-    "responsible": "Local Municipality"
+    "department": "Roads",
+    "responsible": "Roads Department"
   },
   "damaged_road": {
-    "department": "Highways Department",
-    "responsible": "Highways Department"
+    "department": "Roads",
+    "responsible": "Roads Department"
   },
   "illegal_speed_breaker": {
-    "department": "Traffic Police / Corporation",
-    "responsible": "Local Municipality"
+    "department": "Roads",
+    "responsible": "Roads Department"
   },
   "streetlight_not_working": {
-    "department": "TNEB / Corporation Electrical Dept",
-    "responsible": "TNEB"
+    "department": "Electrical",
+    "responsible": "Electrical Department"
   },
   "broken_pole": {
-    "department": "TNEB",
-    "responsible": "TNEB"
+    "department": "Electrical",
+    "responsible": "Electrical Department"
   },
   "garbage_overflow": {
-    "department": "Corporation Sanitation Dept",
-    "responsible": "Sanitation Inspector"
+    "department": "Sanitation",
+    "responsible": "Sanitation Department"
   },
   "illegal_dumping": {
-    "department": "Corporation Sanitation Dept",
-    "responsible": "Sanitation Inspector"
+    "department": "Sanitation",
+    "responsible": "Sanitation Department"
   },
   "open_drainage": {
-    "department": "CMWSSB / Corporation",
-    "responsible": "Drainage Department"
+    "department": "Sewerage",
+    "responsible": "Sewerage Department"
   },
   "blocked_drainage": {
-    "department": "CMWSSB / Corporation",
-    "responsible": "Drainage Department"
+    "department": "Sewerage",
+    "responsible": "Sewerage Department"
   },
   "sewage_overflow": {
-    "department": "CMWSSB",
-    "responsible": "Metro Water"
+    "department": "Sewerage",
+    "responsible": "Sewerage Department"
   },
   "water_leakage": {
-    "department": "CMWSSB / TWAD Board",
-    "responsible": "Metro Water"
+    "department": "Water Supply & Sewerage",
+    "responsible": "Water Board"
   },
   "no_water_supply": {
-    "department": "CMWSSB / TWAD Board",
-    "responsible": "Metro Water"
+    "department": "Water Supply & Sewerage",
+    "responsible": "Water Board"
   },
   "broken_pipeline": {
-    "department": "CMWSSB",
-    "responsible": "Metro Water"
+    "department": "Water Supply & Sewerage",
+    "responsible": "Water Board"
   },
   "illegal_water_connection": {
-    "department": "CMWSSB",
-    "responsible": "Vigilance Cell"
+    "department": "Water Supply & Sewerage",
+    "responsible": "Water Board"
   },
   "encroachment_on_road": {
-    "department": "Highways / Corporation",
-    "responsible": "Town Planning Officer"
+    "department": "Town Planning",
+    "responsible": "Town Planning Dept"
   },
   "illegal_construction": {
-    "department": "CMDA / DTCP",
-    "responsible": "Town Planning Officer"
+    "department": "Town Planning",
+    "responsible": "Town Planning Dept"
   },
   "slum_encroachment": {
-    "department": "TNSCB",
-    "responsible": "Slum Clearance Board"
+    "department": "Town Planning & Revenue",
+    "responsible": "Revenue Dept"
   },
   "broken_public_toilet": {
-    "department": "Corporation Public Health",
-    "responsible": "Health Officer"
+    "department": "Sanitation & Health",
+    "responsible": "Health Dept"
   },
   "public_toilet_unhygienic": {
-    "department": "Corporation Public Health",
-    "responsible": "Health Officer"
+    "department": "Sanitation & Health",
+    "responsible": "Health Dept"
   },
   "stray_animals": {
-    "department": "Corporation Public Health",
-    "responsible": "Veterinary Officer"
+    "department": "Animal Control",
+    "responsible": "Veterinary Dept"
   },
   "dead_animal": {
-    "department": "Corporation Public Health",
-    "responsible": "Sanitary Inspector"
+    "department": "Sanitation & Animal Control",
+    "responsible": "Solid Waste Management"
   },
   "tree_fallen": {
-    "department": "Corporation Parks Dept",
-    "responsible": "Parks Superintendent"
+    "department": "Garden & Tree Department",
+    "responsible": "Parks Dept"
   },
   "tree_branch_blocking_road": {
-    "department": "Corporation Parks Dept",
-    "responsible": "Parks Superintendent"
+    "department": "Garden & Tree Department",
+    "responsible": "Parks Dept"
   },
   "open_manhole": {
-    "department": "CMWSSB",
-    "responsible": "Metro Water"
-  },
-  "damaged_footpath": {
-    "department": "Corporation Roads Dept",
-    "responsible": "Assistant Engineer"
+    "department": "Sewerage/Drainage",
+    "responsible": "Drainage Dept"
   },
   "broken_traffic_signal": {
-    "department": "Traffic Police",
-    "responsible": "Traffic Enforcement"
+    "department": "Electrical/Traffic",
+    "responsible": "Traffic Police"
   },
   "overflowing_dustbin": {
-    "department": "Ramky / Corporation",
-    "responsible": "Zone Supervisor"
+    "department": "Solid Waste Management",
+    "responsible": "WMC"
   },
   "illegal_hoarding": {
-    "department": "Corporation Revenue Dept",
-    "responsible": "Revenue Officer"
-  },
-  "market_hygiene_issue": {
-    "department": "Corporation Public Health",
-    "responsible": "Health Inspector"
-  },
-  "mosquito_breeding": {
-    "department": "Corporation Public Health",
-    "responsible": "Vector Control Officer"
-  },
-  "open_burning_of_garbage": {
-    "department": "TNPCB / Corporation",
-    "responsible": "Sanitary Inspector"
-  },
-  "school_building_damaged": {
-    "department": "School Education Dept",
-    "responsible": "Chief Education Officer"
-  },
-  "playground_not_maintained": {
-    "department": "Corporation Parks Dept",
-    "responsible": "Parks Officer"
+    "department": "Revenue/Advertisement",
+    "responsible": "Advertisement Dept"
   }
 }
