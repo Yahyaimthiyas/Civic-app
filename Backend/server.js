@@ -8,12 +8,33 @@ const express = require('express');
 const cors = require('cors');
 const admin = require('firebase-admin');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+// Ensure uploads directory exists
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
+// Check for required Gemini API key
+if (!process.env.GEMINI_API_KEY) {
+  console.warn('\n⚠️  [Civic App Warning]: GEMINI_API_KEY is missing in your .env configuration.');
+  console.warn('👉 AI classification and chatbot services require a Gemini API key.');
+  console.warn('👉 Refer to "Backend/.env.example" to set it up.\n');
+}
+
 // Initialize Firebase Admin SDK using the local service account key.
 const serviceAccountPath = path.join(__dirname, 'serviceAccountKey.json');
+if (!fs.existsSync(serviceAccountPath)) {
+  console.error('\n❌ [Firebase Init Error]: serviceAccountKey.json not found!');
+  console.error('👉 Please download your Firebase service account key and place it as "Backend/serviceAccountKey.json".');
+  console.error('👉 Refer to "Backend/serviceAccountKey.example.json" for instructions.\n');
+  process.exit(1);
+}
+
 admin.initializeApp({
   credential: admin.credential.cert(require(serviceAccountPath)),
 });

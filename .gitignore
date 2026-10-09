@@ -1,20 +1,87 @@
-# Firebase Admin SDK key
-Backend/serviceAccountKey.json
+# ==========================================
+# Environment Variables & Secrets
+# ==========================================
+.env
+.env.*
+*.env
+!.env.example
+!*.env.example
 
-# Environment secrets
-Backend/.env
+# Firebase & Google Credentials
+**/serviceAccountKey.json
+**/google-services.json
+serviceAccountKey.json
+google-services.json
 
-# Firebase config
-flutterapp/android/app/google-services.json
-
-# Uploaded files
-Backend/uploads/
-
-# Node modules
+# ==========================================
+# Node / Backend
+# ==========================================
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Flutter build
-build/
+# Uploaded Files (Keep folder structure via .gitkeep)
+Backend/uploads/*
+!Backend/uploads/.gitkeep
+
+# ==========================================
+# Flutter / Dart
+# ==========================================
+**/doc/api/
+.dart_tool/
+**/Flutter/.last_build_id
 .flutter-plugins
 .flutter-plugins-dependencies
-.dart_tool/
+.pub-cache/
+.pub/
+build/
+**/build/
+coverage/
+
+# Android Studio & Gradle
+.gradle/
+**/android/.gradle/
+**/android/local.properties
+**/android/app/debug/
+**/android/app/profile/
+**/android/app/release/
+**/android/key.jks
+*.keystore
+
+# iOS / macOS Flutter
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/ephemeral/
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Pods/
+**/macos/Flutter/ephemeral/
+**/macos/Pods/
+
+# Symbols & Obfuscation
+app.*.symbols
+app.*.map.json
+
+# ==========================================
+# IDE & Operating System Files
+# ==========================================
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+[Dd]esktop.ini

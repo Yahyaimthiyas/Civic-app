@@ -65,44 +65,53 @@ Civic Connect is a secure, interactive full-stack platform that empowers citizen
 ## ⚙️ Setup & Installation
 
 ### Prerequisite Setup
-1.  **Firebase Project**: Create a Firebase project and generate a Service Account Private Key. Save it as `Backend/serviceAccountKey.json`.
-2.  **Google AI Studio**: Obtain a Gemini API Key from Google AI Studio.
+1. **Google AI Studio**: Obtain a Gemini API Key from [Google AI Studio](https://aistudio.google.com/).
+2. **Firebase Project**:
+   - Create a Firebase project in the [Firebase Console](https://console.firebase.google.com/).
+   - Generate a Firebase Admin Service Account Private Key and save it as `Backend/serviceAccountKey.json` (see `Backend/serviceAccountKey.example.json`).
+   - Download `google-services.json` from your Firebase project settings and place it in `flutterapp/android/app/` (see `flutterapp/android/app/google-services.json.example`).
 
 ### Backend Setup
-1.  Navigate to the Backend directory:
-    ```bash
-    cd Backend
-    ```
-2.  Install dependencies:
-    ```bash
-    npm install
-    ```
-3.  Configure the environment variables in a `.env` file:
-    ```env
-    PORT=4000
-    GEMINI_API_KEY=your_gemini_api_key
-    ```
-4.  Start the Server:
-    ```bash
-    npm start
-    ```
+1. Navigate to the Backend directory:
+   ```bash
+   cd Backend
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Configure environment variables:
+   ```bash
+   cp .env.example .env
+   ```
+   Open `.env` and fill in your credentials:
+   ```env
+   PORT=4000
+   GEMINI_API_KEY=your_gemini_api_key_here
+   ```
+4. Start the Server:
+   ```bash
+   npm start
+   ```
 
-### Frontend Setup
-1.  Navigate to the Flutter directory:
-    ```bash
-    cd flutterapp
-    ```
-2.  Configure API endpoint base URL in `lib/core/network/api_constants.dart`:
-    ```dart
-    // Replace with your machine's IP address if running on physical device
-    static const String baseUrl = 'http://<YOUR_DEV_MACHINE_IP>:4000';
-    ```
-3.  Add your `google-services.json` file inside the `android/app/` folder.
-4.  Fetch flutter packages:
-    ```bash
-    flutter pub get
-    ```
-5.  Launch the application:
-    ```bash
-    flutter run
-    ```
+### Frontend Setup (Flutter)
+1. Navigate to the Flutter directory:
+   ```bash
+   cd flutterapp
+   ```
+2. Configure API endpoint base URL in `lib/core/network/api_constants.dart`:
+   ```dart
+   // Use your machine's local IP address if running on a physical Android/iOS device
+   // Use 'http://10.0.2.2:4000' for Android Emulator
+   // Use 'http://localhost:4000' for iOS Simulator or Web
+   static const String baseUrl = 'http://<YOUR_DEV_MACHINE_IP>:4000';
+   ```
+3. Ensure `google-services.json` is present in `flutterapp/android/app/`.
+4. Fetch Flutter packages:
+   ```bash
+   flutter pub get
+   ```
+5. Launch the application:
+   ```bash
+   flutter run
+   ```
